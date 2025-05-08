@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Campus Critics - Upload Proof</title>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --critic-purple: #9c89b8;
+            --critic-blue: #b8bedd;
+            --critic-pink: #ffc8dd;
+            --critic-green: #c1edcc;
+            --critic-yellow: #f0e6ab;
+            --critic-orange: #ffd5c2;
+            --text-dark: #3a3a3a;
+            --text-light: #5e5e5e;
+            --whiteboard: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Patrick Hand', 'Comic Neue', cursive, sans-serif;
+            background-color: #faf3f0;
+            background-image: 
+                radial-gradient(var(--critic-yellow) 1px, transparent 1px),
+                radial-gradient(var(--critic-blue) 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .upload-container {
+            max-width: 500px;
+            width: 100%;
+            background-color: var(--whiteboard);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(156, 137, 184, 0.2);
+            border: 4px solid var(--critic-purple);
+            position: relative;
+        }
+
+        .upload-container:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, 
+                var(--critic-purple), 
+                var(--critic-blue), 
+                var(--critic-pink), 
+                var(--critic-green));
+            border-radius: 20px 20px 0 0;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--critic-purple);
+            text-align: center;
+            position: relative;
+            font-weight: 700;
+        }
+
+        h2:after {
+            content: "📸";
+            position: absolute;
+            right: 20px;
+            top: -10px;
+        }
+
+        .upload-instructions {
+            background-color: var(--critic-yellow);
+            padding: 1rem;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            border: 2px dashed var(--critic-purple);
+            font-size: 1.1rem;
+        }
+
+        .upload-instructions p {
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-instructions ul {
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .upload-instructions li {
+            margin-bottom: 0.3rem;
+        }
+
+        .file-upload {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 1.5rem;
+            border: 3px dashed var(--critic-blue);
+            border-radius: 15px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .file-upload-label:hover {
+            border-color: var(--critic-purple);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .file-upload-label:before {
+            content: "📁";
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-upload-label span {
+            color: var(--critic-purple);
+            font-weight: 600;
+        }
+
+        .file-upload-input {
+            display: none;
+        }
+
+        .btn-upload {
+            background: linear-gradient(45deg, var(--critic-purple), var(--critic-blue));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 5px 0 rgba(140, 120, 170, 0.5);
+            transition: all 0.3s;
+            display: block;
+            width: 100%;
+            margin-top: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .btn-upload:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 rgba(140, 120, 170, 0.5);
+        }
+
+        .btn-upload:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 rgba(140, 120, 170, 0.5);
+        }
+
+        .btn-upload:after {
+            content: "⬆️";
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .file-name {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--critic-purple);
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .floating-emoji {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0.8;
+            z-index: -1;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @media (max-width: 768px) {
+            .upload-container {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating emojis for fun -->
+    <div class="floating-emoji" style="top: 10%; left: 10%;">📚</div>
+    <div class="floating-emoji" style="top: 70%; right: 10%;">📊</div>
+    <div class="floating-emoji" style="bottom: 10%; left: 15%;">✏️</div>
+    <div class="floating-emoji" style="top: 30%; right: 12%;">🔍</div>
+
+    <div class="upload-container">
+        <h2>Upload Your Proof</h2>
+        
+        <div class="upload-instructions">
+            <p><strong>Help us verify your review:</strong></p>
+            <ul>
+                <li>Upload a screenshot of your attendance</li>
+                <li>Acceptable formats:JPG, PNG</li>
+                <li>File size limit: 5MB</li>
+            </ul>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+            <div class="file-upload">
+                <label for="image" class="file-upload-label">
+                    <span>Drag & drop your file here or click to browse</span>
+                </label>
+                <input type="file" name="image" id="image" class="file-upload-input" required accept=".pdf,.jpg,.jpeg,.png">
+                <div id="file-name-display" class="file-name"></div>
+            </div>
+
+            <!-- Hidden inputs -->
+            <input type="hidden" name="prof_id" value="{{ prof_id }}">
+            <input type="hidden" name="rating_data" value="{{ rating_data }}">
+            <input type="hidden" name="review_text" value="{{ review_text }}">
+            <input type="hidden" name="type" value="{{ type }}">
+
+            <button type="submit" class="btn-upload">
+                Submit Proof
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Display selected file name
+        document.getElementById('image').addEventListener('change', function(e) {
+            const fileNameDisplay = document.getElementById('file-name-display');
+            if (this.files.length > 0) {
+                fileNameDisplay.textContent = 'Selected file: ' + this.files[0].name;
+            } else {
+                fileNameDisplay.textContent = '';
+            }
+        });
+
+        // Drag and drop functionality
+        const fileUploadLabel = document.querySelector('.file-upload-label');
+        
+        fileUploadLabel.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUploadLabel.style.borderColor = 'var(--critic-purple)';
+            fileUploadLabel.style.backgroundColor = 'var(--critic-yellow)';
+        });
+
+        fileUploadLabel.addEventListener('dragleave', () => {
+            fileUploadLabel.style.borderColor = 'var(--critic-blue)';
+            fileUploadLabel.style.backgroundColor = 'white';
+        });
+
+        fileUploadLabel.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUploadLabel.style.borderColor = 'var(--critic-blue)';
+            fileUploadLabel.style.backgroundColor = 'white';
+            
+            if (e.dataTransfer.files.length) {
+                document.getElementById('image').files = e.dataTransfer.files;
+                const fileNameDisplay = document.getElementById('file-name-display');
+                fileNameDisplay.textContent = 'Selected file: ' + e.dataTransfer.files[0].name;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Join Our Campus Critics  Community 🎓</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --professor-purple: #9c89b8;
+            --happy-yellow: #f0e6ab;
+            --brainy-blue: #b8bedd;
+            --creative-coral: #efc7c2;
+            --growth-green: #c1edcc;
+            --energetic-orange: #ffd5c2;
+            --chalkboard: #3a3a3a;
+            --whiteboard: #f8f9fa;
+        }
+        
+        body {
+            background-color: #faf3f0;
+            background-image: 
+                radial-gradient(var(--happy-yellow) 1px, transparent 1px),
+                radial-gradient(var(--brainy-blue) 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            color: var(--chalkboard);
+            font-family: 'Patrick Hand', 'Comic Neue', cursive, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 500px;
+            background-color: var(--whiteboard);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(156, 137, 184, 0.3);
+            padding: 40px;
+            border: 4px solid var(--professor-purple);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, 
+                var(--professor-purple), 
+                var(--happy-yellow), 
+                var(--brainy-blue), 
+                var(--creative-coral),
+                var(--growth-green));
+        }
+        
+        h2 {
+            color: var(--professor-purple);
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            font-size: 2rem;
+        }
+        
+        h2:after {
+            content: "✏️";
+            position: absolute;
+            right: 20px;
+            top: -15px;
+            font-size: 1.5rem;
+            transform: rotate(20deg);
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--professor-purple);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .form-control {
+            border-radius: 15px;
+            border: 2px solid var(--brainy-blue);
+            padding: 12px 15px;
+            font-size: 1.1rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s;
+            font-family: 'Patrick Hand', cursive;
+        }
+        
+        .form-control:focus {
+            border-color: var(--professor-purple);
+            box-shadow: 0 0 0 4px var(--happy-yellow);
+            transform: scale(1.02);
+        }
+        
+        .form-control::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+        
+        .btn-primary {
+            background-color: var(--professor-purple);
+            border: none;
+            color: white;
+            font-weight: 700;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            display: block;
+            width: 100%;
+            margin-top: 25px;
+            box-shadow: 0 5px 0 rgba(140, 120, 170, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary:hover {
+            background-color: #8a76a6;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 rgba(140, 120, 170, 0.5);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 rgba(140, 120, 170, 0.5);
+        }
+        
+        .btn-primary:after {
+            content: "🎓";
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+        
+        .alert-info {
+            background-color: var(--happy-yellow);
+            color: var(--chalkboard);
+            border: 2px dashed var(--professor-purple);
+            border-radius: 15px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+            padding: 15px;
+        }
+        
+        .alert-info:before {
+            content: "💡";
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        /* Fun floating elements */
+        .floating-emoji {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0.8;
+            z-index: -1;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .container {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating emojis for fun -->
+    <div class="floating-emoji" style="top: 15%; left: 10%;">📚</div>
+    <div class="floating-emoji" style="top: 70%; right: 12%;">🧑‍🏫</div>
+    <div class="floating-emoji" style="bottom: 15%; left: 15%;">✏️</div>
+    <div class="floating-emoji" style="top: 25%; right: 10%;">🔍</div>
+
+    <div class="container mt-5">
+        <h2>Choose Your Professor Pal Name</h2>
+        <p class="text-center mb-4" style="color: var(--professor-purple); font-size: 1.1rem;">
+            Pick a fun name to join our academic community! 🎉
+        </p>
+        
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-info">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <div class="mb-3">
+                <label for="username" class="form-label">What should we call you?</label>
+                <input type="text" class="form-control" name="username" 
+                       placeholder="e.g. QuantumQueen, BookwormBen, TheGradingGuru..." 
+                       required>
+                <div class="form-text mt-2" style="color: var(--professor-purple);">
+                    Pro tip: Make it fun but recognizable to your classmates!
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                Join the Community
+            </button>
+        </form>
+        
+        <div class="text-center mt-4" style="color: var(--professor-purple);">
+            <small>Already have an account? <a href="#" style="color: var(--professor-purple); text-decoration: underline;">Sign in here</a></small>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

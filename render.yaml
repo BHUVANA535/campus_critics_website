@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: rate-my-professor-app
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+      - key: OCR_API_KEY
+        sync: false

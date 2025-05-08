@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Rated Professors - Campus Critics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6a4c93;
+            --secondary: #9c89b8;
+            --accent: #b8bedd;
+            --light: #f8f9fa;
+            --success: #c1edcc;
+            --warning: #f0e6ab;
+            --text-dark: #3a3a3a;
+            --text-light: #5e5e5e;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            background-color: #faf3f0;
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 45px;
+            right: 0;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            min-width: 180px;
+            overflow: hidden;
+            display: none;
+            z-index: 10;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 10px 16px;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--light);
+        }
+
+        .dropdown-item[href*="delete_account"] {
+            color: #e74c3c !important;
+        }
+
+        .dropdown-item[href*="delete_account"]:hover {
+            background-color: rgba(231, 76, 60, 0.1) !important;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background-color: rgba(0,0,0,0.1);
+            margin: 4px 0;
+        }
+
+        .auth-btn {
+            padding: 6px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .login-btn {
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .login-btn:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .register-btn {
+            background-color: var(--warning);
+            color: var(--text-dark);
+        }
+
+        .register-btn:hover {
+            background-color: #e8ddaa;
+        }
+
+        /* Professors Section */
+        .professors-section {
+            padding: 3rem 2rem;
+            background-color: var(--light);
+        }
+
+        .professors-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.8rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+        }
+
+        .view-all {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .professors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .professor-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .professor-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .professor-image-container {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+
+
+        .professor-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center top;
+            transition: transform 0.3s;
+            display: block;
+        }
+
+
+        .professor-card:hover .professor-image {
+            transform: scale(1.05);
+        }
+
+        .professor-info {
+            padding: 1.2rem;
+        }
+
+        .professor-name {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .professor-department {
+            color: var(--text-light);
+            margin-bottom: 0.8rem;
+            font-size: 0.85rem;
+        }
+
+        .professor-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+
+        .stars {
+            color: var(--warning);
+            margin-right: 8px;
+            font-size: 0.9rem;
+        }
+
+        .rating-value {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .view-profile {
+            display: inline-block;
+            padding: 6px 16px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            font-size: 0.85rem;
+        }
+
+        .view-profile:hover {
+            background-color: var(--secondary);
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            border: 2px dashed var(--accent);
+        }
+
+        .no-results:before {
+            content: "🔍";
+            font-size: 1.8rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(106, 76, 147, 0.9), rgba(156, 137, 184, 0.9)), 
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+
+        .search-form {
+            display: flex;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .search-btn {
+            background-color: var(--warning);
+            color: var(--text-dark);
+            border: none;
+            padding: 0 22px;
+            border-radius: 0 30px 30px 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .search-btn:hover {
+            background-color: #e8ddaa;
+        }
+
+        .about-section {
+            padding: 3rem 2rem;
+            background-color: white;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            position: relative;
+            padding-top: 56.25%;
+        }
+
+        .about-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        /* Notification System */
+        .notification-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            max-width: 350px;
+        }
+
+        .notification {
+            background-color: var(--success);
+            color: #2a6b3d;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transform: translateX(120%);
+            transition: transform 0.3s ease-out;
+            font-size: 0.9rem;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .close-notification {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: inherit;
+            margin-left: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .footer-link:hover {
+            opacity: 0.8;
+        }
+
+        .copyright {
+            opacity: 0.7;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .professors-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .section-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: -1;
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .professors-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding-bottom: 1rem;
+            }
+            
+            .nav-controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .search-input {
+                border-radius: 30px;
+                margin-bottom: 8px;
+            }
+            
+            .search-btn {
+                border-radius: 30px;
+                padding: 10px;
+            }
+            
+            .professor-card {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Notification System -->
+    <div class="notification-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="notification">
+                        <span>{{ message }}</span>
+                        <button class="close-notification">&times;</button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="{{ url_for('index') }}" class="logo">
+                <span class="logo-icon">🎓</span>
+                <span class="logo-text">Campus Critics</span>
+            </a>
+            
+            <div class="nav-controls">
+                {% if session.get('email') %}
+                    <div class="user-menu">
+                        <div class="user-avatar">{{ session['email'][0] | upper }}</div>
+                        <div class="dropdown-menu">
+                            <a href="{{ url_for('profile') }}" class="dropdown-item">
+                                <span>👤</span> My Profile
+                            </a>
+                            <a href="{{ url_for('community') }}" class="dropdown-item">
+                                <span>💬</span> Community
+                            </a>
+                            <a href="{{ url_for('upload_attendance') }}" class="dropdown-item">
+                                <span>📊</span> Upload Attendance
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="{{ url_for('delete_account') }}" class="dropdown-item" style="color: #e74c3c;">
+                                <span>🚨</span> Delete Account
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="{{ url_for('logout') }}" class="dropdown-item">
+                                <span>🚪</span> Logout
+                            </a>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="auth-btn login-btn">Login</a>
+                    <a href="{{ url_for('register') }}" class="auth-btn register-btn">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Find and Rate Your Professors</h1>
+            <p class="hero-subtitle">Join thousands of students sharing honest reviews to help each other succeed</p>
+            
+            <div class="search-container">
+                <form method="GET" action="{{ url_for('index') }}" class="search-form">
+                    <input type="text" name="query" class="search-input" placeholder="Search professors by name..." value="{{ request.args.get('query', '') }}" required>
+                    <button type="submit" class="search-btn">Search</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="section-container">
+            <div>
+                <h2 class="section-title">About Campus Critics</h2>
+                <p class="section-text">Campus Critics is a student-driven platform where you can share honest reviews about professors, courses, and your academic experience.</p>
+                <p class="section-text">Our mission is to create transparency in education by empowering students to make informed decisions about their academic journey.</p>
+                <p class="section-text">Join our community of thousands of students who are helping each other succeed!</p>
+            </div>
+            <div class="about-image">
+                <img src="{{ url_for('static', filename='us.jpg') }}" alt="Students studying together">
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="professors-section">
+        <div class="professors-container">
+            <div class="section-header">
+                <h2 class="section-title">
+                    {% if request.args.get('query') %}
+                        Search Results for "{{ request.args.get('query') }}"
+                    {% else %}
+                        Top Rated Professors
+                    {% endif %}
+                </h2>
+            </div>
+            
+            <div class="professors-grid">
+                {% if professors %}
+                    {% for professor in professors %}
+                        <div class="professor-card">
+                            <div class="professor-image-container">
+                                <img src="{{ professor.Photo or url_for('static', filename='default-professor.jpg') }}" 
+                                    class="professor-image" 
+                                    alt="{{ professor.Name }}"
+                                    onerror="this.onerror=null;this.src='{{ url_for('static', filename='default-professor.jpg') }}'">
+                            </div>
+                            <div class="professor-info">
+                                <h3 class="professor-name">{{ professor.Name }}</h3>
+                                <p class="professor-department">{{ professor.Designation }}</p>
+                                <div class="professor-rating">
+                                    <div class="stars">
+                                        {% for i in range(5) %}
+                                            {% if i < professor.Avg_rating|round %}
+                                                ★
+                                            {% else %}
+                                                ☆
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <span class="rating-value">{{ professor.Avg_rating|round(1) }}</span>
+                                </div>
+                                <a href="{{ url_for('professor_by_name', name=professor.Name) }}" class="view-profile">View Profile</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-results">
+                        <p>No professors found matching your search.</p>
+                        <a href="{{ url_for('index') }}" class="view-profile">View All Professors</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="{{ url_for('about_us') }}" class="footer-link">About Us</a>
+                <a href="{{ url_for('community') }}" class="footer-link">Community</a>
+            </div>
+            <p class="copyright">© 2025 Campus Critics: Designed with ❤ for students, by team 13 .</p>
+        </div>
+    </footer>
+
+    <script>
+        // Show notifications
+        document.addEventListener('DOMContentLoaded', function() {
+            const notifications = document.querySelectorAll('.notification');
+            notifications.forEach((notification, index) => {
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 100 * index);
+                
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                }, 5000);
+            });
+
+            // Close notifications when clicked
+            document.querySelectorAll('.close-notification').forEach(button => {
+                button.addEventListener('click', function() {
+                    this.parentElement.style.display = 'none';
+                });
+            });
+
+            // User dropdown menu functionality
+            const userAvatar = document.querySelector('.user-avatar');
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+
+            if (userAvatar) {
+                userAvatar.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    dropdownMenu.classList.toggle('show');
+                });
+
+                // Close when clicking outside
+                window.addEventListener('click', function() {
+                    dropdownMenu.classList.remove('show');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

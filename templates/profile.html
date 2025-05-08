@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Profile | Campus Critics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --critic-purple: #9c89b8;
+            --critic-blue: #b8bedd;
+            --critic-pink: #ffc8dd;
+            --critic-green: #c1edcc;
+            --critic-yellow: #f0e6ab;
+            --critic-orange: #ffd5c2;
+            --text-dark: #3a3a3a;
+            --text-light: #5e5e5e;
+            --whiteboard: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Patrick Hand', 'Comic Neue', cursive, sans-serif;
+            background-color: #faf3f0;
+            background-image: 
+                radial-gradient(var(--critic-yellow) 1px, transparent 1px),
+                radial-gradient(var(--critic-blue) 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            color: var(--text-dark);
+            padding: 2rem 1rem;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background-color: var(--whiteboard);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(156, 137, 184, 0.2);
+            border: 4px solid var(--critic-purple);
+            position: relative;
+        }
+
+        .container:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, 
+                var(--critic-purple), 
+                var(--critic-blue), 
+                var(--critic-pink), 
+                var(--critic-green));
+            border-radius: 20px 20px 0 0;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: var(--critic-purple);
+            margin-bottom: 1.5rem;
+            position: relative;
+            font-weight: 700;
+        }
+
+        h2:after {
+            content: "👤";
+            position: absolute;
+            right: 0;
+            top: -10px;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            color: var(--critic-purple);
+            margin: 2rem 0 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px dashed var(--critic-blue);
+        }
+
+        h4 {
+            font-size: 1.5rem;
+            color: var(--critic-purple);
+            margin: 1.5rem 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .profile-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 2px solid var(--critic-blue);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                var(--critic-purple), 
+                var(--critic-blue), 
+                var(--critic-green));
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--critic-purple);
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+
+        .info-value {
+            font-size: 1.2rem;
+            padding-left: 0.5rem;
+        }
+
+        .rating-card, .review-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 2px solid var(--critic-blue);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rating-card:before, .review-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--critic-purple);
+        }
+
+        .professor-name {
+            font-size: 1.4rem;
+            color: var(--critic-purple);
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .rating-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .rating-item {
+            background-color: var(--critic-yellow);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-weight: 600;
+        }
+
+        .review-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 0.8rem;
+        }
+
+        .timestamp {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .timestamp:before {
+            content: "📅";
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 15px;
+            border: 2px dashed var(--critic-blue);
+            margin-bottom: 2rem;
+        }
+
+        .empty-state:before {
+            content: "📝";
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 0;
+        }
+
+        .btn-home {
+            background: linear-gradient(45deg, var(--critic-purple), var(--critic-blue));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 5px 0 rgba(140, 120, 170, 0.5);
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn-home:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 rgba(140, 120, 170, 0.5);
+            color: white;
+        }
+
+        .btn-home:before {
+            content: "🏠";
+        }
+
+        .floating-emoji {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0.8;
+            z-index: -1;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            h3 {
+                font-size: 1.5rem;
+            }
+            
+            .profile-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating emojis for fun -->
+    <div class="floating-emoji" style="top: 10%; left: 10%;">📚</div>
+    <div class="floating-emoji" style="top: 70%; right: 10%;">🧑‍🎓</div>
+    <div class="floating-emoji" style="bottom: 10%; left: 15%;">✏️</div>
+    <div class="floating-emoji" style="top: 30%; right: 12%;">🔍</div>
+
+    <div class="container">
+        <h2>My Campus Critics Profile</h2>
+        
+        <!-- User Information -->
+        <div class="profile-info">
+            <div class="info-card">
+                <div class="info-label">Email</div>
+                <div class="info-value">{{ user.email }}</div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-label">Year</div>
+                <div class="info-value">{{ user.year }}</div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-label">Semester</div>
+                <div class="info-value">{{ user.semester }}</div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-label">Academic Year</div>
+                <div class="info-value">{{ user.academic_year }}</div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-label">School</div>
+                <div class="info-value">{{ user.school }}</div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-label">Branch</div>
+                <div class="info-value">{{ user.branch }}</div>
+            </div>
+        </div>
+
+        <!-- Ratings Section -->
+        <h3>My Contributions</h3>
+        
+        <h4>⭐ My Ratings</h4>
+        {% if ratings %}
+            {% for rating in ratings %}
+                <div class="rating-card">
+                    <div class="professor-name">{{ rating['professor_name'] }}</div>
+                    <div class="rating-details">
+                        <div class="rating-item" style="background-color: var(--critic-green);">
+                            Final: {{ rating['rating'] | round(2) }}
+                        </div>
+                    </div>
+                    {% if rating['comment'] %}
+                        <div class="review-text">{{ rating['comment'] }}</div>
+                    {% endif %}
+                    <div class="timestamp">{{ rating['timestamp'] }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state">
+                <p>You haven't rated any professor yet.</p>
+            </div>
+        {% endif %}
+
+        <!-- Reviews Section -->
+        <h4>✏️ My Reviews</h4>
+        {% if reviews %}
+            {% for review in reviews %}
+                <div class="review-card">
+                    <div class="professor-name">{{ review['professor_name'] }}</div>
+                    <div class="review-text">{{ review['review_text'] }}</div>
+                    <div class="timestamp">{{ review['timestamp'] }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state">
+                <p>You haven't reviewed any professor yet.</p>
+            </div>
+        {% endif %}
+
+        <a href="{{ url_for('index') }}" class="btn-home">Back to Home</a>
+    </div>
+</body>
+</html>

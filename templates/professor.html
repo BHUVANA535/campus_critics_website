@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ professor.Name }} | Campus Critics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --critic-purple: #9c89b8;
+            --critic-blue: #b8bedd;
+            --critic-pink: #ffc8dd;
+            --critic-green: #c1edcc;
+            --critic-yellow: #f0e6ab;
+            --critic-orange: #ffd5c2;
+            --text-dark: #3a3a3a;
+            --text-light: #5e5e5e;
+            --whiteboard: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Patrick Hand', 'Comic Neue', cursive, sans-serif;
+            background-color: #faf3f0;
+            background-image: 
+                radial-gradient(var(--critic-yellow) 1px, transparent 1px),
+                radial-gradient(var(--critic-blue) 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            color: var(--text-dark);
+            padding: 2rem 1rem;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background-color: var(--whiteboard);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(156, 137, 184, 0.2);
+            border: 4px solid var(--critic-purple);
+            position: relative;
+        }
+
+        .container:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, 
+                var(--critic-purple), 
+                var(--critic-blue), 
+                var(--critic-pink), 
+                var(--critic-green));
+            border-radius: 20px 20px 0 0;
+        }
+
+        .professor-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .professor-photo {
+            flex: 0 0 250px;
+            border-radius: 15px;
+            border: 4px solid var(--critic-blue);
+            box-shadow: 5px 5px 0 var(--critic-orange);
+            transition: transform 0.3s;
+        }
+
+        .professor-photo:hover {
+            transform: rotate(-2deg);
+        }
+
+        .professor-info {
+            flex: 1;
+            padding-top: 1rem;
+        }
+
+        .professor-name {
+            font-size: 2.5rem;
+            color: var(--critic-purple);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .professor-title {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .rating-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .star {
+            font-size: 2rem;
+            color: var(--critic-yellow);
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+        }
+
+        .rating-count {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            background-color: var(--critic-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--critic-purple), var(--critic-blue));
+            color: white;
+            box-shadow: 0 5px 0 rgba(140, 120, 170, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 rgba(140, 120, 170, 0.5);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(45deg, var(--critic-green), var(--critic-blue));
+            color: var(--text-dark);
+            box-shadow: 0 5px 0 rgba(161, 237, 204, 0.5);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 rgba(161, 237, 204, 0.5);
+        }
+
+        .btn-profile {
+            background: var(--critic-yellow);
+            color: var(--text-dark);
+            box-shadow: 0 5px 0 rgba(240, 230, 171, 0.5);
+        }
+
+        .btn-profile:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 rgba(240, 230, 171, 0.5);
+        }
+
+        .reviews-header {
+            font-size: 1.8rem;
+            color: var(--critic-purple);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px dashed var(--critic-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .reviews-header:before {
+            content: "📝";
+        }
+
+        .review-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 2px solid var(--critic-blue);
+            position: relative;
+        }
+
+        .review-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                var(--critic-purple), 
+                var(--critic-blue), 
+                var(--critic-green));
+            border-radius: 15px 0 0 15px;
+        }
+
+        .review-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
+
+        .review-meta {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            padding-left: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .no-reviews {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            background-color: white;
+            border-radius: 15px;
+            border: 2px dashed var(--critic-blue);
+        }
+
+        .no-reviews:before {
+            content: "💬";
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .alert {
+            border-radius: 15px;
+            font-weight: 600;
+            padding: 15px;
+            position: relative;
+            border: none;
+            margin-bottom: 2rem;
+        }
+
+        .alert-success {
+            background-color: var(--critic-green);
+            color: #2a6b3d;
+        }
+
+        .alert-danger {
+            background-color: var(--critic-pink);
+            color: #8b3a3a;
+        }
+
+        .alert-info {
+            background-color: var(--critic-yellow);
+            color: var(--text-dark);
+        }
+
+        .floating-emoji {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0.8;
+            z-index: -1;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @media (max-width: 768px) {
+            .professor-header {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .professor-photo {
+                flex: 0 0 auto;
+                width: 200px;
+            }
+            
+            .professor-info {
+                text-align: center;
+            }
+            
+            .rating-container {
+                justify-content: center;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating emojis for fun -->
+    <div class="floating-emoji" style="top: 10%; left: 10%;">📚</div>
+    <div class="floating-emoji" style="top: 70%; right: 10%;">🧑‍🏫</div>
+    <div class="floating-emoji" style="bottom: 10%; left: 15%;">✏️</div>
+    <div class="floating-emoji" style="top: 30%; right: 12%;">🔍</div>
+
+    <div class="container">
+        <!-- Professor Header Section -->
+        <div class="professor-header">
+            <img src="{{ professor.Photo }}" alt="{{ professor.Name }}" class="professor-photo">
+            
+            <div class="professor-info">
+                <h1 class="professor-name">{{ professor.Name }}</h1>
+                <h2 class="professor-title">{{ professor.Designation }}</h2>
+                
+                <!-- Rating Section -->
+                <div class="rating-container">
+                    <div class="stars">
+                        {% set full_stars = professor.Avg_rating|round(0, 'floor') %}
+                        {% for i in range(1, 6) %}
+                            {% if i <= full_stars %}
+                                <span class="star">★</span>
+                            {% else %}
+                                <span class="star" style="color: #ddd;">★</span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <span class="rating-count">{{ professor.No_ratings }} ratings</span>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <a href="{{ url_for('questionnaire', prof_id=professor.id) }}" class="btn btn-primary">
+                        <span>⭐ Rate Now</span>
+                    </a>
+                    <a href="{{ url_for('write_review', professor_id=professor.id) }}" class="btn btn-secondary">
+                        <span>✏️ Write Review</span>
+                    </a>
+                    <a href="{{ professor.Profile_link }}" target="_blank" class="btn btn-profile">
+                        <span>👨‍🏫 Full Profile</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <!-- Reviews Section -->
+        <h3 class="reviews-header">Student Reviews</h3>
+        
+        {% if reviews %}
+            {% for review in reviews %}
+                <div class="review-card">
+                    <p class="review-text">{{ review['review_text'] }}</p>
+                    <div class="review-meta">
+                        <span>📅 {{ review['timestamp'] }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-reviews">
+                No reviews yet. Be the first to share your experience!
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        // Function to check if attendance is verified before allowing review
+        function checkAttendanceForReview() {
+            fetch('{{ url_for("submit_review", professor_id=professor.id) }}', {
+                method: 'GET',
+                redirect: 'manual'
+            })
+            .then(response => {
+                if (response.redirected && response.url.includes('upload_attendance')) {
+                    window.location.href = "{{ url_for('upload_attendance') }}";
+                } else {
+                    toggleReviewForm();
+                }
+            })
+            .catch(error => {
+                alert('Error checking attendance: ' + error);
+            });
+        }
+
+        // Function to toggle the review form visibility
+        function toggleReviewForm() {
+            var form = document.getElementById("reviewForm");
+            form.style.display = form.style.display === "none" ? "block" : "none";
+        }
+    </script>
+</body>
+</html>

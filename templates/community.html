@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Camous Critics Community 🎓</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        :root {
+            --professor-purple: #9c89b8;
+            --happy-yellow: #f0e6ab;
+            --brainy-blue: #b8bedd;
+            --creative-coral: #efc7c2;
+            --growth-green: #c1edcc;
+            --energetic-orange: #ffd5c2;
+            --chalkboard: #3a3a3a;
+            --whiteboard: #f8f9fa;
+        }
+        
+        body {
+            background-color: #faf3f0;
+            background-image: radial-gradient(var(--happy-yellow) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--chalkboard);
+            font-family: 'Comic Neue', 'Segoe UI', cursive, sans-serif;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            background-color: var(--whiteboard);
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(156, 137, 184, 0.2);
+            padding: 30px;
+            margin-top: 30px !important;
+            margin-bottom: 30px;
+            border: 3px solid var(--professor-purple);
+        }
+        
+        h2 {
+            color: var(--professor-purple);
+            font-weight: 700;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        h2:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                var(--professor-purple), 
+                var(--happy-yellow), 
+                var(--brainy-blue), 
+                var(--creative-coral));
+            border-radius: 2px;
+        }
+        
+        h4 {
+            color: var(--professor-purple);
+            margin: 25px 0 15px;
+            font-weight: 600;
+            background-color: var(--happy-yellow);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 30px;
+            box-shadow: 3px 3px 0 var(--energetic-orange);
+        }
+        
+        .form-control {
+            border-radius: 15px;
+            border: 2px dashed var(--brainy-blue);
+            padding: 12px;
+            transition: all 0.3s;
+            font-size: 1rem;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .form-control:focus {
+            border: 2px solid var(--professor-purple);
+            box-shadow: 0 0 0 3px var(--happy-yellow);
+            background-color: white;
+        }
+        
+        .form-control::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+        
+        .btn-primary {
+            background-color: var(--professor-purple);
+            border-color: var(--professor-purple);
+            color: white;
+            font-weight: 600;
+            padding: 10px 25px;
+            border-radius: 50px;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary:hover {
+            background-color: #8a76a6;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline-primary, .btn-outline-success {
+            border-radius: 50px;
+            font-weight: 500;
+            padding: 5px 15px;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+        
+        .btn-outline-primary {
+            color: var(--professor-purple);
+            border-color: var(--professor-purple);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--professor-purple);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .btn-outline-success {
+            color: #5cb85c;
+            border-color: #5cb85c;
+        }
+        
+        .btn-outline-success:hover {
+            background-color: #5cb85c;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .list-group-item {
+            border-radius: 15px !important;
+            margin-bottom: 15px;
+            border: 2px solid var(--brainy-blue);
+            transition: all 0.3s;
+            padding: 20px;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .list-group-item:hover {
+            transform: translateX(5px) rotate(0.5deg);
+            box-shadow: 5px 5px 0 var(--happy-yellow);
+        }
+        
+        .list-group-item:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                var(--professor-purple), 
+                var(--brainy-blue), 
+                var(--growth-green));
+        }
+        
+        strong {
+            color: var(--professor-purple);
+            font-weight: 700;
+        }
+        
+        em {
+            color: #777;
+            font-size: 0.85rem;
+            font-style: normal;
+            background-color: var(--whiteboard);
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .btn-link {
+            color: var(--professor-purple);
+            text-decoration: none;
+            font-weight: 600;
+            background-color: var(--happy-yellow);
+            padding: 3px 10px !important;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 10px;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-link:hover {
+            color: #7a5a9a;
+            text-decoration: none;
+            background-color: #e8ddaa;
+            transform: scale(1.05);
+        }
+        
+        /* Nested replies styling */
+        .list-group .list-group {
+            border-left: 4px dotted var(--creative-coral);
+            padding-left: 20px;
+            margin-top: 15px;
+        }
+        
+        /* Animation for new posts */
+        @keyframes slideIn {
+            0% { opacity: 0; transform: translateY(20px) rotate(-2deg); }
+            100% { opacity: 1; transform: translateY(0) rotate(0); }
+        }
+        
+        .list-group-item {
+            animation: slideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        /* Fun floating elements */
+        .floating-emoji {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.1;
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+            }
+            
+            body {
+                background-color: var(--whiteboard);
+                background-image: none;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Fun hover effects */
+        .list-group-item:hover:before {
+            width: 8px;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--whiteboard);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--professor-purple);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7a5a9a;
+        }
+    </style>
+</head>
+<body class="container mt-4">
+    <!-- Floating emojis for fun -->
+    <div class="floating-emoji" style="top: 10%; left: 5%;">🎓</div>
+    <div class="floating-emoji" style="top: 30%; right: 8%;">📚</div>
+    <div class="floating-emoji" style="bottom: 20%; left: 7%;">✏️</div>
+    <div class="floating-emoji" style="bottom: 40%; right: 5%;">🧠</div>
+
+    <h2>Welcome to Campus Critics, {{ username }}! 👋💡</h2>
+    <p class="text-muted">Share your thoughts, ask questions, and connect with classmates!</p>
+
+    <!-- Post Form -->
+    <form method="POST" class="mb-4">
+        <div class="mb-3">
+            <textarea name="message" class="form-control" rows="4" placeholder="What's on your academic mind today? Share your thoughts with the class... ✍️" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">
+            <span class="me-2">Post</span> 📌
+        </button>
+    </form>
+
+    <h4>📣 Discussions</h4>
+
+    {% macro render_replies(parent_id, replies, post_id) %}
+        <ul class="list-group mt-2 ms-4">
+            {% for reply in replies %}
+                {% if reply['parent_reply_id'] == parent_id %}
+                    <li class="list-group-item">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="badge bg-primary rounded-pill me-2">👥</span>
+                            <strong>{{ reply['username'] }}</strong>
+                            <span class="mx-2">•</span>
+                            <em>{{ reply['timestamp'] }}</em>
+                        </div>
+                        <div class="ps-4">
+                            {{ reply['message'] }}
+                        </div>
+
+                        <!-- Reply Button -->
+                        <button class="btn btn-link p-0 mt-2" data-bs-toggle="collapse" data-bs-target="#replyForm-{{ reply['id'] }}" aria-expanded="false" aria-controls="replyForm-{{ reply['id'] }}">
+                            💬 Reply
+                        </button>
+
+                        <!-- Reply Form -->
+                        <div class="collapse mt-2" id="replyForm-{{ reply['id'] }}">
+                            <form method="POST" action="/reply">
+                                <input type="hidden" name="post_id" value="{{ post_id }}">
+                                <input type="hidden" name="parent_reply_id" value="{{ reply['id'] }}">
+                                <div class="mb-2">
+                                    <textarea name="message" class="form-control" rows="2" placeholder="Type your reply here... 🖋️" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-sm btn-outline-success">Post Reply 📤</button>
+                            </form>
+                        </div>
+
+                        {{ render_replies(reply['id'], replies, post_id) }}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% endmacro %}
+
+    <ul class="list-group">
+        {% for post in posts %}
+            <li class="list-group-item">
+                <div class="d-flex align-items-center mb-2">
+                    <span class="badge bg-warning text-dark rounded-pill me-2">📝</span>
+                    <strong>{{ post['username'] }}</strong>
+                    <span class="mx-2">•</span>
+                    <em>{{ post['timestamp'] }}</em>
+                </div>
+                <div class="ps-4 mb-3">
+                    {{ post['message'] }}
+                </div>
+
+                <!-- Reply Button for Post -->
+                <button class="btn btn-link p-0" data-bs-toggle="collapse" data-bs-target="#replyForm-post-{{ post['id'] }}" aria-expanded="false" aria-controls="replyForm-post-{{ post['id'] }}">
+                    💬 Start a discussion
+                </button>
+
+                <!-- Reply Form for Post -->
+                <div class="collapse mt-2" id="replyForm-post-{{ post['id'] }}">
+                    <form method="POST" action="/reply">
+                        <input type="hidden" name="post_id" value="{{ post['id'] }}">
+                        <input type="hidden" name="parent_reply_id" value="">
+                        <div class="mb-2">
+                            <textarea name="message" class="form-control" rows="3" placeholder="What would you like to add to the discussion? 💭" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-outline-primary">Post Reply 📤</button>
+                    </form>
+                </div>
+
+                <!-- Render Replies Only for This Post -->
+                {{ render_replies(None, post.replies, post.id) }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <div class="mt-4 text-center text-muted">
+        <small>Keep the discussion respectful and academic! 🎓✨</small>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Campus Critics - Review {{ professor_name }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --critic-purple: #9c89b8;
+            --critic-blue: #b8bedd;
+            --critic-pink: #ffc8dd;
+            --critic-green: #c1edcc;
+            --critic-yellow: #f0e6ab;
+            --critic-orange: #ffd5c2;
+            --text-dark: #3a3a3a;
+            --text-light: #5e5e5e;
+            --whiteboard: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Patrick Hand', 'Comic Neue', cursive, sans-serif;
+            background-color: #faf3f0;
+            background-image: 
+                radial-gradient(var(--critic-yellow) 1px, transparent 1px),
+                radial-gradient(var(--critic-blue) 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background-color: var(--whiteboard);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(156, 137, 184, 0.2);
+            border: 4px solid var(--critic-purple);
+            position: relative;
+        }
+
+        .container:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, 
+                var(--critic-purple), 
+                var(--critic-blue), 
+                var(--critic-pink), 
+                var(--critic-green));
+            border-radius: 20px 20px 0 0;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--critic-purple);
+            text-align: center;
+            position: relative;
+            font-weight: 700;
+        }
+
+        h2:after {
+            content: "✏️";
+            position: absolute;
+            right: 20px;
+            top: -10px;
+        }
+
+        .alert {
+            border-radius: 15px;
+            font-weight: 600;
+            padding: 15px;
+            position: relative;
+            border: none;
+            margin-bottom: 2rem;
+        }
+
+        .alert-success {
+            background-color: var(--critic-green);
+            color: #2a6b3d;
+        }
+
+        .alert-danger {
+            background-color: var(--critic-pink);
+            color: #8b3a3a;
+        }
+
+        .alert-info {
+            background-color: var(--critic-yellow);
+            color: var(--text-dark);
+        }
+
+        .alert:before {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+
+        .alert-success:before {
+            content: "✅";
+        }
+
+        .alert-danger:before {
+            content: "⚠️";
+        }
+
+        .alert-info:before {
+            content: "💡";
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 1.2rem;
+            border-radius: 15px;
+            border: 2px solid var(--critic-blue);
+            background-color: white;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            font-family: 'Patrick Hand', cursive;
+            transition: all 0.3s;
+            min-height: 200px;
+            box-shadow: inset 0 0 10px rgba(184, 190, 221, 0.2);
+        }
+
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--critic-purple);
+            box-shadow: 0 0 0 4px var(--critic-yellow);
+        }
+
+        .form-group textarea::placeholder {
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--critic-purple), var(--critic-blue));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 5px 0 rgba(140, 120, 170, 0.5);
+            transition: all 0.3s;
+            display: block;
+            width: 100%;
+            margin-top: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 rgba(140, 120, 170, 0.5);
+        }
+
+        .btn-primary:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 rgba(140, 120, 170, 0.5);
+        }
+
+        .btn-primary:after {
+            content: "📝";
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .floating-emoji {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0.8;
+            z-index: -1;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .tips {
+            background-color: var(--critic-yellow);
+            padding: 1rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border: 2px dashed var(--critic-purple);
+        }
+
+        .tips h4 {
+            color: var(--critic-purple);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .tips ul {
+            padding-left: 1.5rem;
+            margin-bottom: 0;
+        }
+
+        .tips li {
+            margin-bottom: 0.3rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating emojis for fun -->
+    <div class="floating-emoji" style="top: 10%; left: 10%;">📚</div>
+    <div class="floating-emoji" style="top: 70%; right: 10%;">🧑‍🏫</div>
+    <div class="floating-emoji" style="bottom: 10%; left: 15%;">✏️</div>
+    <div class="floating-emoji" style="top: 30%; right: 12%;">🔍</div>
+
+    <div class="container mt-5">
+        <h2>Review Professor {{ professor_name }}</h2>
+        <p class="text-center" style="color: var(--critic-purple); margin-bottom: 2rem;">
+            Share your honest experience to help fellow students! 🎓
+        </p>
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="tips">
+            <h4>✏️ Writing a Great Review:</h4>
+            <ul>
+                <li>Be specific about what you liked/disliked</li>
+                <li>Mention teaching style and course workload</li>
+                <li>Share tips for succeeding in the class</li>
+                <li>Keep it respectful and constructive</li>
+            </ul>
+        </div>
+
+        <!-- Review form -->
+        <form method="POST" action="{{ url_for('submit_review', professor_id=professor_id) }}">
+            <div class="form-group">
+                <textarea class="form-control" name="review_text" 
+                          placeholder="Write your review here... 
+                          - What was the professor's teaching style like? 
+                          - How were the assignments and exams? 
+                          - Would you recommend this professor to others? 
+                          - Any advice for future students?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">
+                Publish Your Review
+            </button>
+        </form>
+    </div>
+</body>
+</html>

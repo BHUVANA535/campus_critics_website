@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Campus Critics - Rate Your Professor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --critic-purple: #9c89b8;
+      --critic-blue: #b8bedd;
+      --critic-pink: #ffc8dd;
+      --critic-green: #c1edcc;
+      --critic-yellow: #f0e6ab;
+      --critic-orange: #ffd5c2;
+      --text-dark: #3a3a3a;
+      --text-light: #5e5e5e;
+      --whiteboard: #f8f9fa;
+    }
+
+    body {
+      font-family: 'Patrick Hand', 'Comic Neue', cursive, sans-serif;
+      background-color: #faf3f0;
+      background-image: 
+        radial-gradient(var(--critic-yellow) 1px, transparent 1px),
+        radial-gradient(var(--critic-blue) 1px, transparent 1px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+      color: var(--text-dark);
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background-color: var(--whiteboard);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 30px rgba(156, 137, 184, 0.2);
+      border: 4px solid var(--critic-purple);
+      position: relative;
+    }
+
+    .container:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 10px;
+      background: linear-gradient(90deg, var(--critic-purple), var(--critic-blue), var(--critic-pink), var(--critic-green));
+      border-radius: 20px 20px 0 0;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      color: var(--critic-purple);
+      text-align: center;
+      position: relative;
+      font-weight: 700;
+    }
+
+    h2:after {
+      content: "✏️";
+      position: absolute;
+      right: 20px;
+      top: -10px;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--critic-purple);
+      background-color: var(--critic-yellow);
+      display: inline-block;
+      padding: 5px 15px;
+      border-radius: 30px;
+      box-shadow: 3px 3px 0 var(--critic-orange);
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--critic-purple);
+      font-size: 1.1rem;
+    }
+
+    form input, form select, form textarea {
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 1.2rem;
+      border-radius: 15px;
+      border: 2px solid var(--critic-blue);
+      background-color: white;
+      color: var(--text-dark);
+      font-size: 1rem;
+      font-family: 'Patrick Hand', cursive;
+      transition: all 0.3s;
+    }
+
+    form input:focus, form select:focus, form textarea:focus {
+      outline: none;
+      border-color: var(--critic-purple);
+      box-shadow: 0 0 0 4px var(--critic-yellow);
+      transform: scale(1.01);
+    }
+
+    form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .rating-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .rating-group label {
+      flex: 1 1 100%;
+    }
+
+    .rating-options {
+      display: flex;
+      gap: 10px;
+    }
+
+    .rating-options input[type="radio"] {
+      display: none;
+    }
+
+    .rating-options label {
+      padding: 0.5rem 1rem;
+      background-color: var(--critic-blue);
+      border-radius: 10px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      font-weight: bold;
+    }
+
+    .rating-options input[type="radio"]:checked + label {
+      background-color: var(--critic-purple);
+      color: white;
+      border-color: var(--critic-yellow);
+    }
+
+    .rating-scale {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-top: -0.5rem;
+    }
+
+    button {
+      background: linear-gradient(45deg, var(--critic-purple), var(--critic-blue));
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      border: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 5px 0 rgba(140, 120, 170, 0.5);
+      transition: all 0.3s;
+      display: block;
+      width: 100%;
+      margin-top: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 0 rgba(140, 120, 170, 0.5);
+    }
+
+    button:active {
+      transform: translateY(2px);
+      box-shadow: 0 3px 0 rgba(140, 120, 170, 0.5);
+    }
+
+    button:after {
+      content: "📝";
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .section {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border: 2px solid var(--critic-blue);
+    }
+
+    .floating-emoji {
+      position: absolute;
+      font-size: 1.8rem;
+      opacity: 0.8;
+      z-index: -1;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 1.5rem; }
+      h2 { font-size: 1.8rem; }
+      h3 { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating emojis -->
+  <div class="floating-emoji" style="top: 10%; left: 10%;">📚</div>
+  <div class="floating-emoji" style="top: 70%; right: 10%;">🧑‍🏫</div>
+  <div class="floating-emoji" style="bottom: 10%; left: 15%;">✏️</div>
+  <div class="floating-emoji" style="top: 30%; right: 12%;">🔍</div>
+
+  <div class="container">
+    <h2>Campus Critics Professor Review</h2>
+    <p style="text-align: center; color: var(--critic-purple); margin-bottom: 2rem;">
+      Help your fellow students by sharing your honest experience! 🎓
+    </p>
+    
+    <form method="POST" action="/submit_rating/{{ prof_id }}">
+      <div class="section">
+        <h3>1. Course Information</h3>
+        <label>Course Name</label>
+        <input name="course_name" placeholder="e.g. Introduction to Psychology" required>
+
+        <label>Semester Taken</label>
+        <select name="semester">
+          <option>Fall</option>
+          <option>Spring</option>
+          <option>Summer</option>
+        </select>
+
+        <label>Year Taken</label>
+        <input name="year" placeholder="e.g. 2024" required>
+      </div>
+
+      <div class="section">
+        <h3>2. Teaching Style</h3>
+
+        {% for field in [
+          ('explain_concepts', 'Explains Concepts Clearly'),
+          ('clear_lectures', 'Lecture Clarity'),
+          ('encourages_participation', 'Encourages Participation'),
+          ('responsiveness', 'Responsiveness')
+        ] %}
+        <div class="rating-group">
+          <label>{{ field[1] }}</label>
+          <div class="rating-options">
+            {% for i in range(1, 6) %}
+              <input type="radio" name="{{ field[0] }}" id="{{ field[0] }}-{{ i }}" value="{{ i }}" required>
+              <label for="{{ field[0] }}-{{ i }}">{{ i }}</label>
+            {% endfor %}
+          </div>
+          <span class="rating-scale">(1 = Low, 5 = High)</span>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="section">
+        <h3>3. Course Materials</h3>
+
+        {% for field in [
+          ('helpful_materials', 'Helpful Materials'),
+          ('manageable_workload', 'Workload'),
+          ('fair_grading', 'Grading Fairness')
+        ] %}
+        <div class="rating-group">
+          <label>{{ field[1] }}</label>
+          <div class="rating-options">
+            {% for i in range(1, 6) %}
+              <input type="radio" name="{{ field[0] }}" id="{{ field[0] }}-{{ i }}" value="{{ i }}" required>
+              <label for="{{ field[0] }}-{{ i }}">{{ i }}</label>
+            {% endfor %}
+          </div>
+          <span class="rating-scale">(1 = Low, 5 = High)</span>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="section">
+        <h3>4. Overall Rating</h3>
+        <div class="rating-group">
+          <label>Overall Rating</label>
+          <div class="rating-options">
+            {% for i in range(1, 6) %}
+              <input type="radio" name="overall_rating" id="overall_rating-{{ i }}" value="{{ i }}" required>
+              <label for="overall_rating-{{ i }}">{{ i }}</label>
+            {% endfor %}
+          </div>
+          <span class="rating-scale">(1 = Poor, 5 = Excellent)</span>
+        </div>
+
+        <label>Would You Recommend This Professor?</label>
+        <select name="recommend">
+          <option value="1">Yes, absolutely! 👍</option>
+          <option value="0">No, I wouldn't 👎</option>
+        </select>
+      </div>
+
+      <button type="submit">Submit Your Review</button>
+    </form>
+  </div>
+</body>
+</html>

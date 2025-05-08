@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Campus Critics - Verify OTP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --critic-purple: #9c89b8;
+            --critic-blue: #b8bedd;
+            --critic-pink: #ffc8dd;
+            --critic-green: #c1edcc;
+            --critic-yellow: #f0e6ab;
+            --critic-orange: #ffd5c2;
+            --text-dark: #3a3a3a;
+            --whiteboard: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Patrick Hand', 'Comic Neue', cursive, sans-serif;
+            background-color: #faf3f0;
+            background-image: 
+                radial-gradient(var(--critic-yellow) 1px, transparent 1px),
+                radial-gradient(var(--critic-blue) 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .otp-container {
+            max-width: 450px;
+            width: 100%;
+            background-color: var(--whiteboard);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(156, 137, 184, 0.2);
+            border: 4px solid var(--critic-purple);
+            position: relative;
+            text-align: center;
+        }
+
+        .otp-container:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, 
+                var(--critic-purple), 
+                var(--critic-blue), 
+                var(--critic-pink), 
+                var(--critic-green));
+            border-radius: 20px 20px 0 0;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--critic-purple);
+            font-weight: 700;
+            position: relative;
+        }
+
+        h2::after {
+            content: "🔐";
+            position: absolute;
+            right: 20px;
+            top: -10px;
+        }
+
+        input[type="text"] {
+            padding: 0.8rem;
+            font-size: 1.1rem;
+            border: 2px solid var(--critic-purple);
+            border-radius: 10px;
+            width: 80%;
+            margin-bottom: 1.2rem;
+            background-color: #fff;
+        }
+
+        button {
+            background: linear-gradient(45deg, var(--critic-purple), var(--critic-blue));
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 5px 0 rgba(140, 120, 170, 0.5);
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 rgba(140, 120, 170, 0.5);
+        }
+
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 0 rgba(140, 120, 170, 0.5);
+        }
+
+        .message-list {
+            margin-top: 1rem;
+            list-style: none;
+            padding: 0;
+            color: var(--critic-purple);
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .otp-container {
+                padding: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            input[type="text"] {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="otp-container">
+        <h2>Verify OTP</h2>
+        <form method="POST" action="{{ url_for('verify_otp') }}">
+            <input type="hidden" name="email" value="{{ email }}">
+            <input type="text" name="otp" placeholder="Enter OTP" required>
+            <br>
+            <button type="submit">Verify</button>
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="message-list">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Campus Critics - Delete Account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --critic-purple: #9c89b8;
+            --critic-blue: #b8bedd;
+            --critic-pink: #ffc8dd;
+            --critic-green: #c1edcc;
+            --critic-yellow: #f0e6ab;
+            --critic-orange: #ffd5c2;
+            --text-dark: #3a3a3a;
+            --text-light: #5e5e5e;
+            --whiteboard: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Patrick Hand', 'Comic Neue', cursive, sans-serif;
+            background-color: #faf3f0;
+            background-image: 
+                radial-gradient(var(--critic-yellow) 1px, transparent 1px),
+                radial-gradient(var(--critic-blue) 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            color: var(--text-dark);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .delete-container {
+            max-width: 500px;
+            width: 100%;
+            background-color: var(--whiteboard);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(156, 137, 184, 0.2);
+            border: 4px solid var(--critic-pink);
+            position: relative;
+            text-align: center;
+        }
+
+        .delete-container:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, 
+                var(--critic-purple), 
+                var(--critic-blue), 
+                var(--critic-pink), 
+                var(--critic-green));
+            border-radius: 20px 20px 0 0;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--critic-purple);
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #ff6b6b, #ff9999);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 5px 0 rgba(255, 107, 107, 0.5);
+            transition: all 0.3s;
+            margin-right: 1rem;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 rgba(255, 107, 107, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--critic-blue);
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            border: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--critic-purple);
+        }
+
+        .floating-emoji {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0.8;
+            z-index: -1;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating emojis -->
+    <div class="floating-emoji" style="top: 10%; left: 10%;">💣</div>
+    <div class="floating-emoji" style="top: 70%; right: 10%;">⚠️</div>
+    <div class="floating-emoji" style="bottom: 10%; left: 15%;">🗑️</div>
+    <div class="floating-emoji" style="top: 30%; right: 12%;">😢</div>
+
+    <div class="delete-container">
+        <h1>Delete Account</h1>
+        <p>Are you sure you want to delete your account?<br>This action is <strong>irreversible</strong>.</p>
+        <form method="POST">
+            <button type="submit" class="btn-danger">Yes, Delete</button>
+            <a href="{{ url_for('index') }}" class="btn-secondary">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
