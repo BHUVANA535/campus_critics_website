@@ -1,5 +1,8 @@
 # 🎓 Campus Critics – Rate Your Professors
 
+## website link : https://campus-critics-website.onrender.com/
+
+
 Campus Critics is a website where students can **rate professors**, **share course experiences**, and **interact via a student community**. The platform ensures review authenticity through **email based OTP Registartion**, helping students make better academic decisions.
 
 ---
