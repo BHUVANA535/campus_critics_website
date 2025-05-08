@@ -36,6 +36,3 @@ Campus Critics is a website where students can **rate professors**, **share cour
 3. **Run main.py**
       ```bash
       python main.py
-
-   
-
