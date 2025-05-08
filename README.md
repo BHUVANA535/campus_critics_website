@@ -7,22 +7,6 @@ Campus Critics is a website where students can **rate professors**, **share cour
 
 ---
 
-##  Features
-
-- 🔐 **OTP based Registration** using university email 
-- 🔍 **Search professors** by name
-- 🌟 Submit detailed **ratings** with feedback
-- 📊 View professor pages with **weighted average scores**
-- 🗣️ Post and comment in the **community forum** 
-
-## Tech Stack
-
-- **Backend**: Python (Flask)  
-- **Frontend**: HTML, CSS, Javascript 
-- **Database**: SQLite3
-- **Authentication**: Email OTP via SMTP  
-- **Environment Management**: python-dotenv  
-
 
 ## Setup Instructions (Run Locally)
 
@@ -49,3 +33,20 @@ Campus Critics is a website where students can **rate professors**, **share cour
 
 To rate/review the professor you will be asked to upload the screenshot of attendance perecentage on juno app
 ![Attendance Screenshot](Sample_attendance.jpg)
+
+
+##  Features
+
+- 🔐 **OTP based Registration** using university email 
+- 🔍 **Search professors** by name
+- 🌟 Submit detailed **ratings** with feedback
+- 📊 View professor pages with **weighted average scores**
+- 🗣️ Post and comment in the **community forum** 
+
+## Tech Stack
+
+- **Backend**: Python (Flask)  
+- **Frontend**: HTML, CSS, Javascript 
+- **Database**: SQLite3
+- **Authentication**: Email OTP via SMTP  
+- **Environment Management**: python-dotenv  
