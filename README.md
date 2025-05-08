@@ -36,3 +36,13 @@ Campus Critics is a website where students can **rate professors**, **share cour
 3. **Run main.py**
       ```bash
       python main.py
+
+## Registration : OTP Authentication
+
+1. register with university email "xxxxxx@mahindrauniversity.edu.in"
+2. otp will be sent to that email
+
+## OCR: Only the user with attendance >=75% will allowed to rate/review the professor
+
+To rate/review the professor you will be asked to upload the screenshot of attendance perecentage on juno app
+![Attendance Screenshot](Sample_attendance.jpg)
