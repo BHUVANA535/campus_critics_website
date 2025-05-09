@@ -47,6 +47,7 @@
 ## OCR: Only the user with attendance >=75% will allowed to rate/review the professor
 
 To rate/review the professor you will be asked to upload the screenshot of attendance perecentage on juno app
+
 ![Attendance Screenshot](Sample_attendance.jpg)
 
 
