@@ -2,7 +2,7 @@
 
 
 ---
-🌐 **Live Website**: [https://campus-critics-website.onrender.com](https://campus-critics-website.onrender.com)
+🌐 **Live Website**: [Campus_Critics](https://campus-critics-website.onrender.com)
 
 ---
 
