@@ -6,13 +6,13 @@
 
 ---
 
-[SRS](https://github.com/BHUVANA535/campus_critics_website/blob/main/Team13_SRS%20Document.pdf)
+[Team13_SRS Document.pdf](https://github.com/BHUVANA535/campus_critics_website/blob/main/Team13_SRS%20Document.pdf)
 
 ---
-[SDS](https://github.com/BHUVANA535/campus_critics_website/blob/main/Project%20Software%20Design%20Specification.pdf)
+[Project Software Design Specification.pdf](https://github.com/BHUVANA535/campus_critics_website/blob/main/Project%20Software%20Design%20Specification.pdf)
 
 ---
-[SoW](https://github.com/BHUVANA535/campus_critics_website/blob/main/Statement%20of%20Work%20(SOW)_CampusCritics.pdf)
+[Statement of Work (SOW)_CampusCritics.pdf](https://github.com/BHUVANA535/campus_critics_website/blob/main/Statement%20of%20Work%20(SOW)_CampusCritics.pdf)
 
 ---
 
