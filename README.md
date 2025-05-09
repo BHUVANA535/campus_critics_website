@@ -42,6 +42,7 @@
 
 1. register with university email "xxxxxx@mahindrauniversity.edu.in"
 2. otp will be sent to that email
+3. check junk for the email if it can't be found
 
 ## OCR: Only the user with attendance >=75% will allowed to rate/review the professor
 
