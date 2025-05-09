@@ -4,7 +4,7 @@
 
 ## 🌐  LIVE WEBSITE
 
-👉 **Check it out here:** 🌐 [**Campus Critics**](https://campus-critics-website.onrender.com)
+👉 **Check it out here:** [**Campus Critics**](https://campus-critics-website.onrender.com)
 
 
 [Team13_SRS Document.pdf](https://github.com/BHUVANA535/campus_critics_website/blob/main/Team13_SRS%20Document.pdf)
