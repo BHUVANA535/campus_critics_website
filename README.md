@@ -6,6 +6,12 @@
 
 ---
 
+[SRS](https://github.com/BHUVANA535/campus_critics_website/blob/main/Team13_SRS%20Document.pdf)
+[SDS](https://github.com/BHUVANA535/campus_critics_website/blob/main/Project%20Software%20Design%20Specification.pdf)
+[SoW](https://github.com/BHUVANA535/campus_critics_website/blob/main/Statement%20of%20Work%20(SOW)_CampusCritics.pdf)
+
+
+
 **Campus Critics** is a student-driven platform to **rate professors**, **share course experiences**, and **engage with a peer community**. The platform ensures **authentic reviews** through OTP-based registration using university emails, empowering students to make smarter academic choices.
 
 ---
