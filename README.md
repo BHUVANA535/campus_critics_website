@@ -27,7 +27,7 @@
 1. **Clone the repository**
    ```bash
    git clone https://github.com/BHUVANA535/campus_critics_website.git
-   cd campus-critics
+   cd campus_critics_website
 
 2. **Install dependencies**
 
